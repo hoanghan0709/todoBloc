@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
-import 'package:todos_bloc/module/home/update/screen/updateIscom_screen.dart';
-
 import 'package:todos_bloc/module/isCompleted/bloc/iscompleted_bloc.dart';
 
-import '../../home/update/bloc/iscompupdate_bloc.dart';
+import '../../update/bloc/iscompupdate_bloc.dart';
+import '../../update/screen/updateIscom_screen.dart';
 
 class isCompletedScreen extends StatelessWidget {
   isCompletedScreen({
