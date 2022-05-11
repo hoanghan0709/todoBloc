@@ -21,6 +21,5 @@ class IscompletedBloc extends Bloc<IscompletedEvent, IscompletedState> {
         },
       );
     });
-     
   }
 }

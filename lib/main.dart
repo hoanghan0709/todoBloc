@@ -6,9 +6,11 @@ import 'package:todos_bloc/module/home/bloc/home_bloc.dart';
 
 import 'module/home/screen/screen_home.dart';
 import 'module/home/update/bloc/iscompupdate_bloc.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   BlocOverrides.runZoned(() => runApp(const MyApp()), blocObserver: Observer());
+  debugPaintSizeEnabled = false;
 }
 
 class MyApp extends StatelessWidget {

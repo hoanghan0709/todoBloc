@@ -29,7 +29,8 @@ class isCompletedScreen extends StatelessWidget {
         child: BlocBuilder<IscompletedBloc, IscompletedState>(
           builder: (context, state) {
             if (state is IscompletedLoading) {
-              return CircularProgressIndicator.adaptive();
+              // return CircularProgressIndicator.adaptive();
+              return Text('---abc---');
             }
             if (state is IscompletedLoaded) {
               return Column(

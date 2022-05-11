@@ -13,15 +13,17 @@ class IscompupdateBloc extends Bloc<IscompupdateEvent, IscompupdateState> {
     this.todoRepository,
   ) : super(IscompupdateLoading()) {
     on<UpdateEvents>(update);
-    on<loadUpdateEvents>(loadupdate);
+    // on<loadUpdateEvents>(loadupdate);
   }
 
-  void loadupdate(loadUpdateEvents events, Emitter<IscompupdateState> emitter) {
-    emitter(IscompupdateLoaded(todoModel: todoRepository.isCompleted));
-  }
+  // void loadupdate(loadUpdateEvents events, Emitter<IscompupdateState> emitter) {
+  //   emitter(IscompupdateLoaded(todoModel: todoRepository.isCompleted));
+  // }
 
-  void update(UpdateEvents events, Emitter<IscompupdateState> emitter) {
-    todoRepository.updateTodo(todoModel: events.todoModel);
-    emitter(IscompupdateLoaded(todoModel: todoRepository.isCompleted));
+  void update(UpdateEvents events, Emitter<IscompupdateState> emitter) async {
+    await Future.delayed(const Duration(seconds: 1), () {
+      todoRepository.updateTodo(todoModel: events.todoModel);
+      emitter(IscompupdateLoaded(todoModel: todoRepository.isCompleted));
+    });
   }
 }

@@ -34,19 +34,19 @@ class HomeAdd extends StatelessWidget {
                 textfield('id', textid),
                 textfield('title', texttitle),
                 textfield('date', textdate),
-                ElevatedButton(
-                    onPressed: () {
-                      var todo = TodoModel(
-                          id: textid.text,
-                          title: texttitle.text,
-                          date: textdate.text);
-                      Navigator.pop(context);
+                Center(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        var todo = TodoModel(
+                            id: textid.text,
+                            title: texttitle.text,
+                            date: textdate.text);
+                        Navigator.pop(context);
 
-                      context.read<AddBloc>().add(addEvents(todo: todo));
-                    },
-                    child: Center(
-                        child: Container(
-                            height: 30.0, width: 30.0, child: Text('add'))))
+                        context.read<AddBloc>().add(addEvents(todo: todo));
+                      },
+                      child: Text('add')),
+                )
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
