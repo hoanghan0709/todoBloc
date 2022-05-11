@@ -16,5 +16,3 @@ class addEvents extends AddEvent {
   // TODO: implement props
   List<Object> get props => [this.todo];
 }
- 
- 

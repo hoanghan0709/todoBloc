@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todos_bloc/core/repository/TodoRepository.dart';
 import 'package:todos_bloc/module/home/bloc/home_bloc.dart';
+
+import '../../db/preferences.dart';
 
 class AllTodoScreen extends StatefulWidget {
   const AllTodoScreen({Key? key}) : super(key: key);
@@ -10,11 +13,19 @@ class AllTodoScreen extends StatefulWidget {
 }
 
 class _AllTodoScreenState extends State<AllTodoScreen> {
+  final _pref = PreferencesService();
+
+  @override
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<HomeBloc>(context).add(loadTodoEvents());
+    BlocProvider.of<HomeBloc>(context).add(
+        loadTodoEvents(todoModel: context.read<TodoRepository>().AllTodos));
+  }
+
+  void init2() async {
+    final todoModel = await _pref.getTodo();
   }
 
   @override
@@ -23,8 +34,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
       body: BlocListener<HomeBloc, HomeState>(
         listener: (context, state) {
           // TODO: implement listener
-          if (state is HomeLoading) { 
-          }
+          if (state is HomeLoading) {}
         },
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
@@ -37,10 +47,12 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
                   const SizedBox(
                     height: 40.0,
                   ),
-                  const Text(
-                    'List Task',
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                  Text(
+                    'LIST TASK',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: Colors.black),
                   ),
                   ListView.builder(
                     shrinkWrap: true,

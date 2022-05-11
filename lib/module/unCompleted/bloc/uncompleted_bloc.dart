@@ -9,15 +9,12 @@ part 'uncompleted_event.dart';
 part 'uncompleted_state.dart';
 
 class UncompletedBloc extends Bloc<UncompletedEvent, UncompletedState> {
-
   TodoRepository repository;
 
   UncompletedBloc(
     this.repository,
   ) : super(UncompletedLoading()) {
-
     on<unCompletedLoading>(_onUnCompletedLoading);
-    
   }
 
   void _onUnCompletedLoading(

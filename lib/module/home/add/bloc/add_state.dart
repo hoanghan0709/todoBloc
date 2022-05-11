@@ -16,6 +16,5 @@ class AddLoaded extends AddState {
 
   AddLoaded({required this.todos});
 }
- 
 
 class AddError extends AddState {}

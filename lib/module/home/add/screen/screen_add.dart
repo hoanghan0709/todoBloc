@@ -18,19 +18,22 @@ class HomeAdd extends StatelessWidget {
     TextEditingController texttitle = TextEditingController();
     TextEditingController textdate = TextEditingController();
 
-    return BlocListener<AddBloc, AddState>(
-      listener: (context, state) {
-        // ben day no moi nhan
-        if (state is AddLoaded) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Added!')));
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: Container(
+        child: SingleChildScrollView(
           child: Card(
             child: Column(
               children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Add Todo',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: Colors.black),
+                  ),
+                ),
                 textfield('id', textid),
                 textfield('title', texttitle),
                 textfield('date', textdate),
@@ -45,7 +48,7 @@ class HomeAdd extends StatelessWidget {
 
                         context.read<AddBloc>().add(addEvents(todo: todo));
                       },
-                      child: Text('add')),
+                      child: Text('add todo')),
                 )
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,31 +67,37 @@ class HomeAdd extends StatelessWidget {
       margin: EdgeInsets.all(15.0),
       child: Column(
         children: [
-          SizedBox(
-            height: 20.0,
-          ),
-          Text(
-            '$title',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          Container(
-            child: Form(
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Hint text',
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide: const BorderSide(
-                          color: Colors.blue,
-                        ))),
-                controller: controller,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '$title',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            margin: EdgeInsets.all(10.0),
-          )
+              Expanded(
+                flex: 7,
+                child: Container(
+                  child: Form(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Enter values',
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: const BorderSide(
+                                color: Colors.blue,
+                              ))),
+                      controller: controller,
+                    ),
+                  ),
+                  margin: EdgeInsets.all(10.0),
+                ),
+              )
+            ],
+            crossAxisAlignment: CrossAxisAlignment.center,
+          ),
         ],
-        crossAxisAlignment: CrossAxisAlignment.center,
       ),
     );
   }

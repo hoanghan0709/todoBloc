@@ -12,13 +12,19 @@ class IscompletedBloc extends Bloc<IscompletedEvent, IscompletedState> {
   IscompletedBloc(
     this.todoRepository,
   ) : super(IscompletedLoading()) {
-    on<LoadedIsCompleted>((event, emit) async {
+
+    on<LoadingIsCompleted>((event, emit) async {
+
       emit(IscompletedLoading());
       await Future.delayed(
-        const Duration(seconds: 2),
+
+        const Duration(seconds: 1),
         () {
+
           emit(IscompletedLoaded(todos: todoRepository.isCompleted));
+
         },
+        
       );
     });
   }

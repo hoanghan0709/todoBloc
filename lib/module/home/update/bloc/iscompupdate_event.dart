@@ -7,7 +7,8 @@ abstract class IscompupdateEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class loadUpdateEvents extends IscompupdateEvent {
+class loadingUpdateEvents extends IscompupdateEvent {
+  
   @override
   List<Object> get props => [];
 }

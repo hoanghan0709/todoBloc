@@ -4,8 +4,7 @@ import 'package:todos_bloc/core/base/observer.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
 import 'package:todos_bloc/module/home/bloc/home_bloc.dart';
 
-import 'module/home/screen/screen_home.dart';
-import 'module/home/update/bloc/iscompupdate_bloc.dart';
+import 'module/home/screen/screen_home.dart'; 
 import 'package:flutter/rendering.dart';
 
 void main() {

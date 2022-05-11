@@ -26,9 +26,10 @@ class _isCompleUpdateScreenState extends State<isCompleUpdateScreen> {
     txttitle = TextEditingController(text: widget.todoModel.title);
     txtdate = TextEditingController(text: widget.todoModel.date);
     super.initState();
+    BlocProvider.of<IscompupdateBloc>(context).add(loadingUpdateEvents());
 
-    BlocProvider.of<IscompupdateBloc>(context)
-        .add(UpdateEvents(todoModel: widget.todoModel));
+    // BlocProvider.of<IscompupdateBloc>(context)
+    //     .add(UpdateEvents(todoModel: widget.todoModel));
   }
 
   @override
@@ -36,7 +37,9 @@ class _isCompleUpdateScreenState extends State<isCompleUpdateScreen> {
     return BlocBuilder<IscompupdateBloc, IscompupdateState>(
       builder: (context, state) {
         if (state is IscompupdateLoading) {
-          return const CircularProgressIndicator.adaptive();
+          return Column(
+            children: [CircularProgressIndicator.adaptive(), Text('data')],
+          );
         }
         if (state is IscompupdateLoaded) {
           return Scaffold(

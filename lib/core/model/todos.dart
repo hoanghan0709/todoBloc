@@ -17,7 +17,7 @@ class TodoModel extends Equatable {
   });
 
   @override
-  List<Object> get props => [this.id];
+  List<Object> get props => [ id];
   TodoModel copyWith({
     String? id,
     String? title,

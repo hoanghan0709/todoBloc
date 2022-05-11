@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
+import 'package:todos_bloc/module/db/preferences.dart';
 import 'package:todos_bloc/module/home/add/bloc/add_bloc.dart';
 import 'package:todos_bloc/module/home/bloc/home_bloc.dart';
 import 'package:todos_bloc/module/home/add/screen/screen_add.dart';
@@ -19,9 +20,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //final _pref = PreferencesService();
   @override
   void initState() {
-    BlocProvider.of<HomeBloc>(context).add(loadTodoEvents());
+    BlocProvider.of<HomeBloc>(context).add(
+        loadTodoEvents(todoModel: context.read<TodoRepository>().AllTodos));
+
     context.read<HomeBloc>().add(PageChangeEvents(index: 0));
     super.initState();
   }
@@ -50,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: HomeAdd(),
                       ),
                     )).whenComplete(() {
-                  ctx.read<HomeBloc>().add(loadTodoEvents());
+                  ctx.read<HomeBloc>().add(loadTodoEvents(
+                      todoModel: context.read<TodoRepository>().AllTodos));
                   showDialog(
                       barrierDismissible: false,
                       context: context,
@@ -94,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       HomeBloc(RepositoryProvider.of<TodoRepository>(context)),
                   child: AllTodoScreen(),
                 ),
-                BlocProvider(// tu man hinh kia chuyen sang
+                BlocProvider(
+                  // tu man hinh kia chuyen sang
                   create: (context) => IscompletedBloc(
                       RepositoryProvider.of<TodoRepository>(context)),
                   child: isCompletedScreen(),

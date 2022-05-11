@@ -4,6 +4,10 @@ part of 'home_bloc.dart';
 abstract class HomeEvent extends Equatable {}
 
 class loadTodoEvents extends HomeEvent {
+  final List<TodoModel> todoModel;
+  loadTodoEvents({
+    required this.todoModel,
+  });
   @override
   // TODO: implement props
   List<Object?> get props => [];
@@ -45,4 +49,3 @@ class PageChangeEvents extends HomeEvent {
     required this.index,
   });
 }
- 

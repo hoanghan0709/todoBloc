@@ -8,7 +8,6 @@ abstract class IscompletedState extends Equatable {
 }
 
 
-class IscompletedInitial extends IscompletedState {}
 class IscompletedLoading extends IscompletedState {
 
 }

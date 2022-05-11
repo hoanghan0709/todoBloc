@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todos_bloc/core/repository/TodoRepository.dart';
 
 import 'package:todos_bloc/module/unCompleted/bloc/uncompleted_bloc.dart';
 
@@ -23,7 +24,13 @@ class UnCompletedScreen extends StatelessWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              Text('asdsd'),
+              Text(
+                'PENDING',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: Colors.black),
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -32,8 +39,8 @@ class UnCompletedScreen extends StatelessWidget {
                       leading: Text(state.listTodo[index].id),
                       trailing: Text(
                           state.listTodo[index].isCompleted ? "ok" : "pending"),
-                      title: Text(state.listTodo[index].date),
-                      subtitle: Text(state.listTodo[index].title),
+                      title: Text(state.listTodo[index].title),
+                      subtitle: Text(state.listTodo[index].date),
                     ),
                   );
                 },

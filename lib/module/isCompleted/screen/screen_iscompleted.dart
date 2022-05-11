@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
+import 'package:todos_bloc/module/home/update/screen/updateIscom_screen.dart';
 
 import 'package:todos_bloc/module/isCompleted/bloc/iscompleted_bloc.dart';
 
 import '../../home/update/bloc/iscompupdate_bloc.dart';
-import '../../home/update/screen/updateIscom_screen.dart';
 
 class isCompletedScreen extends StatelessWidget {
   isCompletedScreen({
@@ -14,8 +14,7 @@ class isCompletedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
-    BlocProvider.of<IscompletedBloc>(ctx)
-        .add(LoadedIsCompleted(todos: ctx.read<TodoRepository>().isCompleted));
+    BlocProvider.of<IscompletedBloc>(ctx).add(LoadingIsCompleted());
     return Scaffold(
       body: BlocListener<IscompletedBloc, IscompletedState>(
         listener: (context, state) {
@@ -29,8 +28,8 @@ class isCompletedScreen extends StatelessWidget {
         child: BlocBuilder<IscompletedBloc, IscompletedState>(
           builder: (context, state) {
             if (state is IscompletedLoading) {
-              // return CircularProgressIndicator.adaptive();
-              return Text('---abc---');
+              return const CircularProgressIndicator.adaptive();
+              //return Text('---abc---');
             }
             if (state is IscompletedLoaded) {
               return Column(
@@ -38,7 +37,13 @@ class isCompletedScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text('abc'),
+                  Text(
+                    'IS COMPLETED',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: Colors.black),
+                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: state.todos.length,
@@ -58,14 +63,14 @@ class isCompletedScreen extends StatelessWidget {
                                 )).whenComplete(() {
                               ctx
                                   .read<IscompletedBloc>()
-                                  .add(LoadedIsCompleted(todos: state.todos));
+                                  .add(LoadingIsCompleted());
                             });
                           },
                           leading: Text(state.todos[index].id),
-                          title: Text(state.todos[index].date),
+                          title: Text(state.todos[index].title),
                           trailing: Text(
                               state.todos[index].isCompleted ? "ok" : "not ok"),
-                          subtitle: Text(state.todos[index].title),
+                          subtitle: Text(state.todos[index].date),
                         ),
                       );
                     },
