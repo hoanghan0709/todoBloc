@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
@@ -10,6 +11,7 @@ import 'package:todos_bloc/module/isCompleted/screen/screen_iscompleted.dart';
 import 'package:todos_bloc/module/unCompleted/bloc/uncompleted_bloc.dart';
 import 'package:todos_bloc/module/unCompleted/screen/screen_uncompleted.dart';
 
+import '../../../service/service.dart';
 import '../../isCompleted/bloc/iscompleted_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,11 +22,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final client = ApiRequest(Dio(BaseOptions(contentType: "application/json")));
   //final _pref = PreferencesService();
   @override
   void initState() {
-    BlocProvider.of<HomeBloc>(context).add(
-        loadTodoEvents(todoModel: context.read<TodoRepository>().AllTodos));
+    BlocProvider.of<HomeBloc>(context).add(loadTodoEvents());
 
     context.read<HomeBloc>().add(PageChangeEvents(index: 0));
     super.initState();
@@ -54,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: HomeAdd(),
                       ),
                     )).whenComplete(() {
-                  ctx.read<HomeBloc>().add(loadTodoEvents(
-                      todoModel: context.read<TodoRepository>().AllTodos));
+                  ctx.read<HomeBloc>().add(loadTodoEvents());
                   showDialog(
                       barrierDismissible: false,
                       context: context,

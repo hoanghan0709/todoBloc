@@ -8,7 +8,7 @@ abstract class UncompletedState extends Equatable {
 class UncompletedLoading extends UncompletedState {}
 
 class UncompletedLoaded extends UncompletedState {
-  final List<TodoModel> listTodo;
+  final Future<List<TodoModel>> listTodo;
   UncompletedLoaded({
     required this.listTodo,
   });

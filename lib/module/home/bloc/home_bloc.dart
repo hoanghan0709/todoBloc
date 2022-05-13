@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+//import 'package:meta/meta.dart';
 import 'package:todos_bloc/core/model/todos.dart';
+import 'package:todos_bloc/service/service.dart';
 
 import '../../../core/repository/TodoRepository.dart';
 
@@ -20,34 +22,43 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<PageChangeEvents>(onPageChange);
   }
 
-  void onLoading(loadTodoEvents event, Emitter<HomeState> emitter) {
-    emitter(HomeLoaded(listTodo: repository.AllTodos));
+  void onLoading(loadTodoEvents event, Emitter<HomeState> emitter) async {
+    final client =
+        ApiRequest(Dio(BaseOptions(contentType: "application/json")));
+
+    //emitter(HomeLoaded(listTodo: client.getTodos()));
+    await Future.delayed(const Duration(seconds: 1), () {
+      emitter(HomeLoaded(listTodo:client.getTodos()));
+    });
   }
 
   void onChangetodo(ChangetodoEvents event, Emitter<HomeState> emitter) {
     repository.changeTodo(index: event.index);
-    emitter(HomeLoaded(listTodo: repository.AllTodos));
+    //emitter(HomeLoaded(listTodo: repository.AllTodos));
   }
 
   void onRemoveTodo(RemoveTodoEvents events, Emitter<HomeState> emit) {
-    repository.removeTodo(index: events.index);
-    emit(HomeLoaded(listTodo: repository.AllTodos));
+      final client =
+         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
+          emit(HomeLoaded(listTodo:client.deleteTodo()));
+    //repository.removeTodo(index: events.index);
+    // emit(HomeLoaded(listTodo: repository.AllTodos));
   }
 
   void onAddTodo(addTodoEvents events, Emitter<HomeState> emitter) {
     repository.addTodo(todoModel: events.todoModel);
-    emitter(HomeLoaded(listTodo: repository.AllTodos));
+    // emitter(HomeLoaded(listTodo: repository.AllTodos));
   }
 
   void onPageChange(PageChangeEvents events, Emitter<HomeState> emit) {
     if (events.index == 0) {
-      emit(HomeLoaded(listTodo: repository.AllTodos));
+      // emit(HomeLoaded(listTodo: repository.AllTodos));
     }
     if (events.index == 1) {
-      emit(HomeLoaded(listTodo: repository.isCompleted));
+      //  emit(HomeLoaded(listTodo: repository.isCompleted));
     }
     if (events.index == 2) {
-      emit(HomeLoaded(listTodo: repository.unCompleted));
+      // emit(HomeLoaded(listTodo: repository.unCompleted));
     }
   }
 }

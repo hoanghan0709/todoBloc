@@ -6,7 +6,7 @@ abstract class HomeState {}
 class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
-  final List<TodoModel> listTodo;
+  final Future<List<TodoModel>> listTodo;
   
   HomeLoaded({required this.listTodo});
   @override

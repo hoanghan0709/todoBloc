@@ -38,6 +38,13 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
   shared_preferences: ^2.0.14
+  build_runner: ^2.1.10
+  json_serializable: ^6.2.0
+  retrofit: ^3.0.1+1
+  logger: ^1.1.0
+  retrofit_generator: ^4.0.1
+  dio: ^4.0.6
+  json_annotation: ^4.5.0
 
 dev_dependencies:
   flutter_test:

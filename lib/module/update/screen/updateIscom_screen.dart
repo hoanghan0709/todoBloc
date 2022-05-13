@@ -18,13 +18,14 @@ class isCompleUpdateScreen extends StatefulWidget {
 class _isCompleUpdateScreenState extends State<isCompleUpdateScreen> {
   TextEditingController txtid = TextEditingController();
   TextEditingController txttitle = TextEditingController();
-  TextEditingController txtdate = TextEditingController();
+  TextEditingController txtcompleted = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
-    txtid = TextEditingController(text: widget.todoModel.id);
+    txtid = TextEditingController(text: widget.todoModel.id.toString());
     txttitle = TextEditingController(text: widget.todoModel.title);
-    txtdate = TextEditingController(text: widget.todoModel.date);
+    txtcompleted =
+        TextEditingController(text: widget.todoModel.completed.toString());
     super.initState();
     BlocProvider.of<IscompupdateBloc>(context).add(loadingUpdateEvents());
 
@@ -51,65 +52,67 @@ class _isCompleUpdateScreenState extends State<isCompleUpdateScreen> {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    Text(
-                      'Update Task',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4!
-                          .copyWith(color: Colors.black),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: TextFormField(
-                      //     style: TextStyle(fontWeight: FontWeight.bold),
-                      //     controller: txtid,
-                      //     decoration: InputDecoration(
-                      //         labelText: 'Id',
-                      //         labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                      //         border: OutlineInputBorder(
-                      //             borderRadius: BorderRadius.circular(20))),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: TextFormField(
-                      //     controller: txttitle,
-                      //     decoration: const InputDecoration(
-                      //         labelText: 'title',
-                      //         hintText: 'title',
-                      //         border: OutlineInputBorder(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(20)))),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: TextFormField(
-                      //     decoration: const InputDecoration(
-                      //         labelText: 'date',
-                      //         hintText: 'date',
-                      //         border: OutlineInputBorder(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(20)))),
-                      //     controller: txtdate,
-                      //   ),
-                      // ),
+                    Center(
+                      child: Text(
+                        'Update Task',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4!
+                            .copyWith(color: Colors.black),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: TextFormField(
+                        //     style: TextStyle(fontWeight: FontWeight.bold),
+                        //     controller: txtid,
+                        //     decoration: InputDecoration(
+                        //         labelText: 'Id',
+                        //         labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                        //         border: OutlineInputBorder(
+                        //             borderRadius: BorderRadius.circular(20))),
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: TextFormField(
+                        //     controller: txttitle,
+                        //     decoration: const InputDecoration(
+                        //         labelText: 'title',
+                        //         hintText: 'title',
+                        //         border: OutlineInputBorder(
+                        //             borderRadius:
+                        //                 BorderRadius.all(Radius.circular(20)))),
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: TextFormField(
+                        //     decoration: const InputDecoration(
+                        //         labelText: 'date',
+                        //         hintText: 'date',
+                        //         border: OutlineInputBorder(
+                        //             borderRadius:
+                        //                 BorderRadius.all(Radius.circular(20)))),
+                        //     controller: txtdate,
+                        //   ),
+                        // ),
+                      ),
                     ),
                     _builText('id', txtid),
                     _builText('tile', txttitle),
-                    _builText('date', txtdate),
+                    _builText(' completed', txtcompleted),
                     ElevatedButton(
                         onPressed: () {
-                          var todo = TodoModel(
-                              id: txtid.text,
-                              title: txttitle.text,
-                              date: txtdate.text);
+                          //   var todo = TodoModel(
+                          // //      id: txtid.text,
+                          //       title: txttitle.text,
+                          //       date: txtdate.text);
 
-                          BlocProvider.of<IscompupdateBloc>(context)
-                              .add(UpdateEvents(todoModel: todo));
-                          Navigator.pop(context);
-                          print('--------todo---------');
-                          print('$todo');
+                          // BlocProvider.of<IscompupdateBloc>(context)
+                          //     .add(UpdateEvents(todoModel: todo));
+                          // Navigator.pop(context);
+                          // print('--------todo---------');
+                          // print('$todo');
                         },
                         child: const Text('update'))
                   ],

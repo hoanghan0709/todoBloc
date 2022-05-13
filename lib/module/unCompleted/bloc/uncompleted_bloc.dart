@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:todos_bloc/core/model/todos.dart';
 import 'package:todos_bloc/core/repository/TodoRepository.dart';
-import 'package:todos_bloc/module/isCompleted/bloc/iscompleted_bloc.dart';
+//import 'package:todos_bloc/module/isCompleted/bloc/iscompleted_bloc.dart';
+
+import '../../../service/service.dart';
 
 part 'uncompleted_event.dart';
 part 'uncompleted_state.dart';
@@ -19,6 +22,8 @@ class UncompletedBloc extends Bloc<UncompletedEvent, UncompletedState> {
 
   void _onUnCompletedLoading(
       unCompletedLoading events, Emitter<UncompletedState> emitter) {
-    emit(UncompletedLoaded(listTodo: repository.unCompleted));
+    final client =
+        ApiRequest(Dio(BaseOptions(contentType: "application/json")));
+    emit(UncompletedLoaded(listTodo: client.getTodosComplete()));
   }
 }

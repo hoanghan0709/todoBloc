@@ -12,7 +12,7 @@ class IscompletedLoading extends IscompletedState {
 
 }
 class IscompletedLoaded extends IscompletedState {
-  final List<TodoModel> todos;
+  final Future <List<TodoModel>> todos;
   IscompletedLoaded({
     required this.todos,
   });
