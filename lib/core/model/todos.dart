@@ -4,41 +4,44 @@ import 'package:equatable/equatable.dart';
 part 'todos.g.dart';
 
 @JsonSerializable()
+// ignore: must_be_immutable
 class TodoModel extends Equatable {
+  int userId;
   int id;
   String title;
   //late String date;
   bool completed;
-  TodoModel({
+  TodoModel(
+    this.userId, {
     required this.id,
     required this.title,
-   // required this.date,
+    // required this.date,
     this.completed = false,
   });
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [];
   TodoModel copyWith({
-    int? id,
-    String? title,
-    String? date,
-    bool? Completed,
+    required int id,
+    required String title,
+    required String date,
+    required bool completed,
   }) {
     return TodoModel(
-      id: id ?? this.id,
-      title: title ?? this.title,
-    ///  date: date ?? this.date,
-      completed: Completed ?? this.completed,
+      userId,
+      id: id,
+      title: title,
+
+      ///  date: date ?? this.date,
+      completed: completed,
     );
   }
-
-  
 
   factory TodoModel.fromJson(Map<String, dynamic> json) =>
       _$TodoModelFromJson(json);
   Map<String, dynamic> toJson() => _$TodoModelToJson(this);
   @override
   String toString() {
-    return 'TodoModel(id: $id, title: $title, completed: $completed)';
+    return 'TodoModel(userid : $userId, $id, title: $title, completed: $completed)';
   }
 }

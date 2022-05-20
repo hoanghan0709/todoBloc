@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-            scaffoldBackgroundColor: Color.fromARGB(255, 146, 189, 223)),
+            scaffoldBackgroundColor: Color(0xAFABD7E8)),
         debugShowCheckedModeBanner: false,
         home: RepositoryProvider(
           create: (context) => TodoRepository(),

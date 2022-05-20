@@ -38,7 +38,7 @@ class UnCompletedScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(child: buildBody(context))
+              Expanded(child: buildBody(context)),
             ],
           );
         } else {
@@ -52,7 +52,7 @@ class UnCompletedScreen extends StatelessWidget {
     final client =
         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
     return FutureBuilder(
-      future: client.getTodosComplete(),
+      future: client.getTodosUnComplete(false),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('error snapshot uncompleted');

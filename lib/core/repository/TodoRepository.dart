@@ -2,9 +2,9 @@ import 'package:todos_bloc/core/model/todos.dart';
 
 class TodoRepository {
   List<TodoModel> listModel = [
-    TodoModel(id: 1, title: 'abcde1',   completed: true),
-    TodoModel(id: 2, title: 'abcde2',  ),
-    TodoModel(id: 3, title: 'abcde3', )
+    // TodoModel(id: 1, title: 'abcde1',   completed: true),
+    // TodoModel(id: 2, title: 'abcde2',  ),
+    // TodoModel(id: 3, title: 'abcde3', )
   ];
   List<TodoModel> get AllTodos {
     return listModel;
@@ -23,7 +23,7 @@ class TodoRepository {
       if (listModel[i] == todoModel) {
         print('found todo');
         listModel[i].title = todoModel.title;
-      //  listModel[i].date = todoModel.date;
+        //  listModel[i].date = todoModel.date;
 
         print(listModel[i].toString());
       }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -28,7 +30,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     //emitter(HomeLoaded(listTodo: client.getTodos()));
     await Future.delayed(const Duration(seconds: 1), () {
-      emitter(HomeLoaded(listTodo:client.getTodos()));
+      emitter(HomeLoaded(listTodo: client.getTodos()));
     });
   }
 
@@ -38,9 +40,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void onRemoveTodo(RemoveTodoEvents events, Emitter<HomeState> emit) {
-      final client =
-         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
-          emit(HomeLoaded(listTodo:client.deleteTodo()));
+    final client =
+        ApiRequest(Dio(BaseOptions(contentType: "application/json")));
+    client.deleteTodo(events.Todo.id);
+    emit(HomeLoaded(listTodo: client.getTodos()));
+    print('deleted!');
     //repository.removeTodo(index: events.index);
     // emit(HomeLoaded(listTodo: repository.AllTodos));
   }

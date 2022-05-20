@@ -23,7 +23,7 @@ class IscompletedBloc extends Bloc<IscompletedEvent, IscompletedState> {
         () {
           final client =
               ApiRequest(Dio(BaseOptions(contentType: "application/json")));
-          emit(IscompletedLoaded(todos: client.getTodosCompleted()));
+          emit(IscompletedLoaded(todos: client.getTodosCompleted(true)));
           // emit(IscompletedLoaded(todos: todoRepository.isCompleted));
         },
       );

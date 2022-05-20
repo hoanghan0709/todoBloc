@@ -24,6 +24,6 @@ class UncompletedBloc extends Bloc<UncompletedEvent, UncompletedState> {
       unCompletedLoading events, Emitter<UncompletedState> emitter) {
     final client =
         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
-    emit(UncompletedLoaded(listTodo: client.getTodosComplete()));
+    emit(UncompletedLoaded(listTodo: client.getTodosUnComplete(false)));
   }
 }

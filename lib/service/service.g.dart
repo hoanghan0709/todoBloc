@@ -36,7 +36,7 @@ class _ApiRequest implements ApiRequest {
   }
 
   @override
-  Future<List<TodoModel>> getTodosCompleted() async {
+  Future<List<TodoModel>> getTodosCompleted(result) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -44,7 +44,7 @@ class _ApiRequest implements ApiRequest {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<TodoModel>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/todos?completed=true',
+                .compose(_dio.options, '/todos?completed=${result}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
@@ -54,7 +54,7 @@ class _ApiRequest implements ApiRequest {
   }
 
   @override
-  Future<List<TodoModel>> getTodosComplete() async {
+  Future<List<TodoModel>> getTodosUnComplete(result) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -62,7 +62,7 @@ class _ApiRequest implements ApiRequest {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<TodoModel>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/todos?completed=false',
+                .compose(_dio.options, '/todos?completed=${result}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
@@ -72,20 +72,34 @@ class _ApiRequest implements ApiRequest {
   }
 
   @override
-  Future<List<TodoModel>> deleteTodo() async {
+  Future<TodoModel> deleteTodo(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<TodoModel>>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TodoModel>(
             Options(method: 'DELETE', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/todos/{id?}',
+                .compose(_dio.options, '/todos/${id}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => TodoModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = TodoModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TodoModel> addTodo(todo) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TodoModel>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/todos',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TodoModel.fromJson(_result.data!);
     return value;
   }
 

@@ -63,7 +63,7 @@ class isCompletedScreen extends StatelessWidget {
     final client =
         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
     return FutureBuilder(
-        future: client.getTodosCompleted(),
+        future: client.getTodosCompleted(true),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text('error screen iscompleted');

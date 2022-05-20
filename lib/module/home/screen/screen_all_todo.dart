@@ -55,7 +55,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
                   ),
                   Center(
                     child: Text(
-                      'LIST TASK',
+                      'LIST TASK  ',
                       style: Theme.of(context)
                           .textTheme
                           .headline4!
@@ -117,7 +117,11 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
                   topLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30))),
           child: ListTile(
-            onLongPress: () {},
+            leading: Text('${todos.length}'),
+            onLongPress: () {
+              BlocProvider.of<HomeBloc>(context).add
+                  (RemoveTodoEvents(Todo: todos[index] ));
+            },
             trailing: (todos[index].completed
                 ? Icon(Icons.check_box)
                 : Icon(Icons.check_box_outline_blank)),

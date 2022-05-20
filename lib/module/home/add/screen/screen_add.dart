@@ -40,13 +40,11 @@ class HomeAdd extends StatelessWidget {
                 Center(
                   child: ElevatedButton(
                       onPressed: () {
-                      //   var todo = TodoModel(
-                      //  //     id: textid.text.,
-                      //       title: texttitle.text,
-                      //       date: textdate.text);
-                        Navigator.pop(context);
+                        var todo = TodoModel(2,
+                            id: 222, title: texttitle.text, completed: true);
 
-                      //  context.read<AddBloc>().add(addEvents(todo: todo));
+                        context.read<AddBloc>().add(addEvents(todo: todo));
+                        Navigator.pop(context);
                       },
                       child: Text('add todo')),
                 )

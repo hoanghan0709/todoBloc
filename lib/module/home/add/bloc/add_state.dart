@@ -12,7 +12,7 @@ class AddInitial extends AddState {}
 class AddLoading extends AddState {}
 
 class AddLoaded extends AddState {
-  final TodoModel todos;
+  final Future<TodoModel> todos;
 
   AddLoaded({required this.todos});
 }

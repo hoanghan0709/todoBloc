@@ -6,7 +6,7 @@ abstract class IscompletedEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadingIsCompleted extends IscompletedEvent {
+class LoadingIsCompleted extends IscompletedEvent { 
   @override
   List<Object> get props => [];
 }

@@ -30,13 +30,13 @@ class ChangetodoEvents extends HomeEvent {
 }
 
 class RemoveTodoEvents extends HomeEvent {
-  int index;
+  final TodoModel Todo;
   RemoveTodoEvents({
-    required this.index,
+    required this.Todo,
   });
 
   @override
-  List<Object> get props => [index];
+  List<Object> get props => [Todo];
 }
 
 class PageChangeEvents extends HomeEvent {
