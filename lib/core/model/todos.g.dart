@@ -8,9 +8,9 @@ part of 'todos.dart';
 
 TodoModel _$TodoModelFromJson(Map<String, dynamic> json) => TodoModel(
       json['userId'] ?? 0,
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      completed: json['completed'] as bool? ?? false,
+      id: json['id'] ?? "",
+      title: json['title'] ?? "",
+      completed: json['completed'] ?? false,
     );
 
 Map<String, dynamic> _$TodoModelToJson(TodoModel instance) => <String, dynamic>{

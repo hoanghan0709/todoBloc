@@ -24,13 +24,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<PageChangeEvents>(onPageChange);
   }
 
-  void onLoading(loadTodoEvents event, Emitter<HomeState> emitter) async {
+  Future onLoading(loadTodoEvents event, Emitter<HomeState> emitter) async {
     final client =
         ApiRequest(Dio(BaseOptions(contentType: "application/json")));
 
     //emitter(HomeLoaded(listTodo: client.getTodos()));
     await Future.delayed(const Duration(seconds: 1), () {
-      emitter(HomeLoaded(listTodo: client.getTodos()));
+      emitter(HomeLoaded(listTodo: client.getTodos())); 
     });
   }
 

@@ -8,12 +8,13 @@ part 'service.g.dart';
 @RestApi(baseUrl: "https://jsonplaceholder.typicode.com/")
 abstract class ApiRequest {
   factory ApiRequest(Dio dio) = _ApiRequest;
+
 //ok
   @GET("/todos")
-  Future<List<TodoModel>> getTodos();
+  Stream<List<TodoModel>> getTodos();
 //ok
   @GET("/todos?completed={result}")
-  Future<List<TodoModel>> getTodosCompleted(@Path() bool result);
+  Future<List<TodoModel>> getTodosCompleted(@Path("result") bool result);
 //ok
   @GET("/todos?completed={result}")
   Future<List<TodoModel>> getTodosUnComplete(@Path('result') bool result);
@@ -23,4 +24,8 @@ abstract class ApiRequest {
 
   @POST("/todos")
   Future<TodoModel> addTodo(TodoModel todo);
+
+  // @MultiPart()
+  // @PUT("/todos/{}")
+  // Future<TodoModel> updateTodo(TodoModel todo);
 }

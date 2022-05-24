@@ -18,7 +18,7 @@ class _ApiRequest implements ApiRequest {
   String? baseUrl;
 
   @override
-  Future<List<TodoModel>> getTodos() async {
+  Stream<List<TodoModel>> getTodos() async* {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -32,7 +32,7 @@ class _ApiRequest implements ApiRequest {
     var value = _result.data!
         .map((dynamic i) => TodoModel.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    yield value;
   }
 
   @override

@@ -6,11 +6,11 @@ abstract class HomeState {}
 class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
-  final Future<List<TodoModel>> listTodo;
-  
+  final Stream<List<TodoModel>> listTodo;
+
   HomeLoaded({required this.listTodo});
   @override
   List<Object> get props => [listTodo];
 }
-class HomeLoadError extends HomeState {}
 
+class HomeLoadError extends HomeState {}

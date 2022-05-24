@@ -34,17 +34,15 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
     return Scaffold(
       body: BlocListener<HomeBloc, HomeState>(
         listener: (context, state) {
-          // TODO: implement listener
-
           if (state is HomeLoaded) {
             ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('loaded home')));
+                .showSnackBar(const SnackBar(content: Text('loaded home')));
           }
         },
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is HomeLoading) {
-              return Center(
+              return const Center(
                   child: CircularProgressIndicator(color: Colors.pink));
             }
             if (state is HomeLoaded) {
@@ -95,7 +93,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
               );
             } else {
               return Container(
-                child: Text("error"),
+                child: const Text("error"),
               );
             }
           },
@@ -108,7 +106,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: todos.length,
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       itemBuilder: (context, index) {
         return Card(
           elevation: 4,
@@ -119,12 +117,12 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
           child: ListTile(
             leading: Text('${todos.length}'),
             onLongPress: () {
-              BlocProvider.of<HomeBloc>(context).add
-                  (RemoveTodoEvents(Todo: todos[index] ));
+              BlocProvider.of<HomeBloc>(context)
+                  .add(RemoveTodoEvents(Todo: todos[index]));
             },
             trailing: (todos[index].completed
-                ? Icon(Icons.check_box)
-                : Icon(Icons.check_box_outline_blank)),
+                ? const Icon(Icons.check_box)
+                : const Icon(Icons.check_box_outline_blank)),
             subtitle: Text(
               todos[index].title,
               style: Theme.of(context)
@@ -139,9 +137,9 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
     );
   }
 
-  FutureBuilder<List<TodoModel>> _buildBody(BuildContext context) {
-    return FutureBuilder<List<TodoModel>>(
-      future: client.getTodos(),
+  StreamBuilder<List<TodoModel>> _buildBody(BuildContext context) {
+    return StreamBuilder<List<TodoModel>>(
+      stream: client.getTodos(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Text('error');
@@ -151,7 +149,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
           return _buildTodo(context, todos!);
         }
         return Container(
-          child: Text('Loadinggg'),
+          child: const Text('Loadinggg'),
         );
       },
     );
@@ -160,7 +158,7 @@ class _AllTodoScreenState extends State<AllTodoScreen> {
   Text txt(String title) {
     return Text(
       title,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
     );
   }
 }
